@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <link rel="icon" href="../img/logo_sin_fondo.png" type="image/png">
+    <link href="style.css" rel="stylesheet" type="text/css" media="all">
+    <style>
+       
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggler" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-controls="bs-example-navbar-collapse-1"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="navbar-brand" href="#">
+                    <img src="../img/logo_sin_fondo.png" class="logo">
+                    <span class="vital-yaiza">Vital Yaiza</span>
+                </a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item active"><a class="nav-link" href="#">Inicio</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Servicios <i class="fas fa-caret-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Servicio 1</a></li>
+                            <li><a href="#">Servicio 2</a></li>
+                            <li><a href="#">Servicio 3</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Sobre Nosotrxs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Registrate</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Inicia Sesión</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Obtener el elemento de "Servicios"
+            var servicesNavItem = document.querySelector('.nav-item');
+
+            // Añadir oyentes de eventos para el ratón
+            servicesNavItem.addEventListener('mouseover', function () {
+                // Mostrar el menú desplegable cuando el ratón pasa sobre "Servicios"
+                this.querySelector('.dropdown-menu').style.display = 'block';
+            });
+
+            servicesNavItem.addEventListener('mouseout', function () {
+                // Ocultar el menú desplegable cuando el ratón sale de "Servicios"
+                this.querySelector('.dropdown-menu').style.display = 'none';
+            });
+        });
+    </script>
+</body>
+
+</html>
