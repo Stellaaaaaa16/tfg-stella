@@ -1,0 +1,15 @@
+.entrada {
+    height: 100vh; /* Ajusta la altura según tus necesidades */
+    overflow: hidden;
+}
+
+#imagenEntrada {
+    width: 100%;
+    height: auto;
+    opacity: 1;
+    transition: opacity 0.5s ease; /* Transición suave de la opacidad */
+}
+
+.oculto {
+    opacity: 0;
+}
