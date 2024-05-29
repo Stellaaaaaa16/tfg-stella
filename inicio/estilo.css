@@ -1,0 +1,391 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+}body {
+    height: 100vh; /* Establecer la altura del body en 100% del viewport height */
+}
+
+
+.carrusel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    width: 100%;
+    height: 100vh;
+    padding: 50px;
+    margin-top: -82px;
+    margin-bottom: -45px;
+}
+
+.imagenes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: end;
+}
+
+.img {
+    box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.85);
+    height: 576px;
+    width: 1134px;
+    border-radius: 15px;
+    margin: 5px;
+    object-fit: cover;
+    filter: saturate(175%);
+}
+
+.texto {
+    overflow: hidden;
+    position: absolute;
+    flex-direction: column;
+    transform: translateY(0px);
+    margin-bottom: 9px;
+    backdrop-filter: blur(20px);
+    background-color: rgba(63, 106, 138, 0.21);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 30px;
+}
+
+.texto h3 {
+    text-shadow: 0px 0px 15px black;
+    padding-top: 40px;
+    color: white;
+    font-weight: 300;
+    font-size: 27px;
+}
+
+.texto p {
+    align-items: center;
+    padding: 20px;
+    color: white;
+    font-size: 0px;
+    font-weight: 300;
+}
+
+.imagenes .texto {
+    width: 600px;
+    height: 100px;
+    transition: 1s;
+}
+
+.imagenes:hover .texto {
+    transition: height 1s, transform 1s, background-color 1s;
+    transform: translateY(-150px);
+    height: 300px;
+    background-color: rgba(63, 106, 138, 0.71);
+}
+
+.imagenes:hover .texto p {
+    transition: font-size 0s .2s linear;
+    font-size: 23px;
+    font-weight: 300;
+
+    text-shadow: 0px 0px 10px #000000;
+}
+
+.click-effect {
+    cursor: pointer;
+    transition: transform 0.1s ease;
+}
+
+.click-effect:hover {
+    transform: scale(1.5);
+}
+
+.puntos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 150px 0;
+    margin-top: 15px;
+    margin-bottom: -20px;
+}
+
+.puntos p {
+    font-size: 100px;
+    margin-top: -70px;
+    color: black;
+}
+
+.puntos .bold {
+    font-weight: 700;
+    margin-left: 10px;
+    margin-right: 10px;
+    color: #5E17EB;
+}
+
+.pedir-cita {
+    background-color: #5e17eb;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.pedir-cita:hover {
+    background-color: #401081;
+}
+
+@media only screen and (max-width: 768px) {
+    .carrusel {
+        display: block;
+        height: auto;
+        position: relative;
+        margin-top: 20px;
+    }
+
+    .imagenes {
+        position: relative;
+    }
+
+    .img {
+        width: 100%;
+        height: auto;
+    }
+
+    .adelante,
+    .atras {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: auto;
+        height: auto;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        z-index: 1;
+    }
+
+    .adelante {
+        right: 0;
+    }
+
+    .atras {
+        left: 0;
+    }
+
+    .texto {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        text-align: center;
+        position: static;
+        width: 100%;
+        margin-top: 50px;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    .texto h3 {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    .texto p {
+        display: none;
+    }
+
+}
+
+
+.wrap-header-principal {
+    background-image: linear-gradient(to bottom, rgb(0 0 0 / .75), rgb(0 0 0 / .5)), url(../img/imgfisio4.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    height: 80vh;
+}
+
+
+.pagina-inicio {
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.titulo-pagina-inicio {
+    color: #ffffff;
+    text-align: center;
+
+    font-family: "Playfair Display", serif;
+
+}
+
+.titulo-pagina-inicio a {
+    color: #000;
+}
+
+.titulo-pagina-inicio p {
+    margin-bottom: 2em;
+}
+
+/*boton de pedir cita*/
+a.gradient-btn {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    line-height: 50px;
+    font-size: 24px;
+    color: #fff;
+    text-decoration: none;
+    letter-spacing: 2px;
+    transition: .5s;
+    background-color: #000;
+    border: 2px solid #fff;
+    border-radius: 60px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, .5);
+    overflow: hidden;
+    padding: 4px;
+}
+
+.gradient-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to left, #00dbde, #fc00ff);
+    z-index: -1;
+    border-radius: 60px;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform .5s ease-in-out;
+}
+
+.gradient-btn:hover::before {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+a.gradient-btn:active {
+    box-shadow: none;
+}
+
+.titulo-bonito {
+    text-align: center;
+    color: black;
+    font-size: 3em;
+    font-family: 'Georgia', serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    transition: text-shadow 0.5s ease;
+}
+
+.titulo-bonito:hover {
+    text-shadow: 2px 2px 4px rgba(156, 29, 188, 0.786);
+}
+
+.container {
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+    height: 100vh;
+    padding: 50px;
+    margin-top: -82px;
+    margin-bottom: -200px;
+}
+
+.heading {
+    font-size: 4vw;
+    color: white;
+    text-align: center;
+}
+
+.profiles {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 80px;
+}
+
+.profile {
+    flex-basis: 260px;
+}
+
+.profile-img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    overflow: hidden;
+    filter: grayscale(0%);
+}
+
+.profile:hover .profile-img {
+    filter: grayscale(100%);
+
+}
+
+.user-name {
+    margin-top: 30px;
+    font-size: 35px;
+}
+
+.profile h5 {
+    font-size: 18px;
+    font-weight: 100;
+    letter-spacing: 3px;
+    color: #ccc;
+}
+
+.profile p {
+    font-size: 16px;
+    margin-top: 20px;
+    text-align: justify;
+}
+
+@media only screen and (max-width: 768px) {
+    .profiles {
+        margin: 20px 0 100px;
+        margin-bottom: -500px;
+        display: block;
+    }
+
+    .profile {
+        display: block;
+        width: 100%;
+        margin-bottom: 5px;
+    }
+
+    /* Dentro del bloque @media */
+    .profile-img {
+        width: 150px;
+        /* Establecer un ancho fijo */
+        height: 150px;
+        /* Establecer una altura fija */
+        object-fit: cover;
+        /* Ajustar la imagen para cubrir el contenedor */
+        border-radius: 50%;
+        overflow: hidden;
+        filter: grayscale(0%);
+        
+    }
+
+
+    .user-name,
+    .profile h5,
+    .profile p {
+        text-align: center;
+    }
+
+    .profile p {
+        margin: 10px;
+    }
+}
