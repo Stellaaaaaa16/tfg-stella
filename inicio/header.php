@@ -37,51 +37,48 @@ if (session_status() === PHP_SESSION_NONE) {
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="navbar-nav ms-auto">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item active"><a class="nav-link" href="../inicio/inicio.php">Inicio</a></li>
-                        <!-- Mostrar los enlaces de servicios directamente en dispositivos móviles -->
-                        <li class="nav-item dropdown d-block d-lg-none">
-                            <a class="nav-link" href="../Servicios/suelo.php">Suelo pélvico</a>
-                        </li>
-                        <li class="nav-item dropdown d-block d-lg-none">
-                            <a class="nav-link" href="../Servicios/trauma.php">Traumatológica</a>
-                        </li>
-                        <li class="nav-item dropdown d-block d-lg-none">
-                            <a class="nav-link" href="../Servicios/neuro.php">Neurológica</a>
-                        </li>
-                        <li class="nav-item dropdown " id="servicesDropdown">
-                            <div class="dropdown-container">
-                                <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Servicios <i class="fas fa-caret-down"></i>
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item d-none d-lg-block" href="../Servicios/suelo.php">Suelo pelvico</a></li>
-                                    <li><a class="dropdown-item d-none d-lg-block" href="../Servicios/trauma.php">Traumatológica</a></li>
-                                    <li><a class="dropdown-item d-none d-lg-block" href="../Servicios/neuro.php">Neurológica</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="../Productos/producto.php">Productos</a></li>
-                        <li class="nav-item"><a class="nav-link" href="../Tarifa/tarifa.php">Tarifa</a></li>
-                        <li class="nav-item"><a class="nav-link" href="../PedirCita/pedir.php">Pedir Cita</a></li>
-                        <li class="nav-item"><a class="nav-link" href="../Contacto/contacto.php">Contacto</a></li>
-                        <li class="nav-item">
-                            <?php
-                            if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']) {
-                                echo "<a class='nav-link' href='#' onclick='confirmarCerrarSesion()'>Cerrar Sesión</a>";
-                            } else {
-                                echo "<a class='nav-link' href='../IniciarSesion/iniciar.php'>Iniciar Sesión</a>";
-                            }
-                            ?>
-                        </li>
-
-                    </ul>
+                    <li class="nav-item active"><a class="nav-link" href="../inicio/inicio.php">Inicio</a></li>
+                    <li class="nav-item dropdown d-block d-lg-none">
+                        <a class="nav-link" href="../Servicios/suelo.php">Suelo pélvico</a>
+                    </li>
+                    <li class="nav-item dropdown d-block d-lg-none">
+                        <a class="nav-link" href="../Servicios/trauma.php">Traumatológica</a>
+                    </li>
+                    <li class="nav-item dropdown d-block d-lg-none">
+                        <a class="nav-link" href="../Servicios/neuro.php">Neurológica</a>
+                    </li>
+                    <li class="nav-item dropdown" id="servicesDropdown">
+                        <div class="dropdown-container">
+                            <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Servicios <i class="fas fa-caret-down"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item d-none d-lg-block" href="../Servicios/suelo.php">Suelo pelvico</a></li>
+                                <li><a class="dropdown-item d-none d-lg-block" href="../Servicios/trauma.php">Traumatológica</a></li>
+                                <li><a class="dropdown-item d-none d-lg-block" href="../Servicios/neuro.php">Neurológica</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="../Productos/producto.php">Productos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../Tarifa/tarifa.php">Tarifa</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../PedirCita/pedir.php">Pedir Cita</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../Contacto/contacto.php">Contacto</a></li>
+                    
+                    <?php
+                    if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']) {
+                        if (isset($_SESSION['is_admin']) && $_SESSION['is_admin']) {
+                            echo "<li class='nav-item'><a class='nav-link' href='../admin/index.php'>Panel de Administración</a></li>";
+                        }
+                        echo "<li class='nav-item'><a class='nav-link' href='#' onclick='confirmarCerrarSesion()'>Cerrar Sesión</a></li>";
+                    } else {
+                        echo "<li class='nav-item'><a class='nav-link' href='../IniciarSesion/iniciar.php'>Iniciar Sesión</a></li>";
+                    }
+                    ?>
+                </ul>
             </div>
-
         </div>
     </nav>
     <button id="btn-scroll-top" class="back-to-top" onclick="scrollToTop()">&#8679;</button>
-
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
     <script>
