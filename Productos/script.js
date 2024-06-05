@@ -3,34 +3,31 @@ document.addEventListener("DOMContentLoaded", function () {
     const carritoMenu = document.getElementById("carrito");
     const productosCarrito = document.getElementById("productos-carrito");
 
-    // Inicialmente ocultamos el carrito
     carritoMenu.style.display = "none";
 
-    // Cargar productos del carrito desde localStorage
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
-    // Función para actualizar la vista del carrito
     function actualizarCarrito() {
         productosCarrito.innerHTML = '';
         let total = 0;
 
-        carrito.forEach(producto => {
+        carrito.forEach((producto, index) => {
             const productoDiv = document.createElement("div");
             productoDiv.classList.add("producto-carrito");
             productoDiv.innerHTML = `
                 <img src="${producto.foto}" alt="Producto">
                 <div class="producto-info">
                     <h4>${producto.nombre}</h4>
-                    <p>Precio: €<span class="precio">${producto.precio}</span></p>
+                    <p>Precio: €<span class="precio">${producto.precio.toFixed(2)}</span></p>
                 </div>
-                <button class="btn-eliminar">Eliminar</button>
+                <button class="btn-eliminar" data-index="${index}">Eliminar</button>
             `;
             productosCarrito.appendChild(productoDiv);
 
             total += parseFloat(producto.precio);
 
             productoDiv.querySelector(".btn-eliminar").addEventListener("click", function () {
-                carrito = carrito.filter(p => p !== producto);
+                carrito.splice(index, 1);
                 localStorage.setItem('carrito', JSON.stringify(carrito));
                 actualizarCarrito();
             });
@@ -44,12 +41,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     actualizarCarrito();
 
-    // Evento de clic para mostrar/ocultar el carrito
     btnMostrarCarrito.addEventListener("click", function () {
         carritoMenu.style.display = carritoMenu.style.display === "none" || carritoMenu.style.display === "" ? "block" : "none";
     });
 
-    // Función para agregar productos al carrito
     window.addToCart = function (event, nombre, precio, foto) {
         event.preventDefault();
 

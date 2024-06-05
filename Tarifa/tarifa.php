@@ -1,17 +1,80 @@
+<?php
+// Conexión a la base de datos
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "vital";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Conexión fallida: " . $conn->connect_error);
+}
+
+// Procesar las solicitudes AJAX
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['message'])) {
+    $message = $_POST['message'];
+    $response = "";
+
+    // Añadir mensajes de depuración
+    error_log("Mensaje recibido: " . $message);
+
+    // Consulta a la base de datos
+    $sql = "SELECT respuesta FROM chatbot WHERE pregunta LIKE ?";
+    $stmt = $conn->prepare($sql);
+    if ($stmt === false) {
+        error_log("Error en la preparación de la consulta: " . $conn->error);
+        die("Error en la preparación de la consulta: " . $conn->error);
+    }
+
+    $likeMessage = "%" . $message . "%";
+    $stmt->bind_param("s", $likeMessage);
+    $stmt->execute();
+    $stmt->bind_result($respuesta);
+
+    if ($stmt->fetch()) {
+        $response = $respuesta;
+    } else {
+        $response = "Lo siento, no tengo una respuesta para eso.";
+    }
+
+    $stmt->close();
+    $conn->close();
+
+    // Añadir mensajes de depuración
+    error_log("Respuesta: " . $response);
+
+    // Enviar la respuesta como JSON
+    echo json_encode(["response" => $response]);
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../img/logo_sin_fondo.png" type="image/x-icon">
     <title>División en Tres Secciones con Tarjetas</title>
     <link rel="stylesheet" href="estilo.css">
-
+    <style>
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+    </style>
 </head>
 
 <body>
     <?php include("../inicio/header.php"); ?>
-
 
     <h1 class="titulo-bonito">BONOS Y TARIFAS</h1>
     <div class="container">
@@ -41,7 +104,7 @@
                     </div>
                 </article>
                 <article class="card card--1">
-                <img src="../img/imgfisio4.jpg" alt="Imagen 1">
+                    <img src="../img/imgfisio4.jpg" alt="Imagen 1">
                     <a href="#" class="card_link">
                         <div class="card__img--hover"></div>
                     </a>
@@ -79,7 +142,7 @@
                     </div>
                 </article>
                 <article class="card card--1">
-                <img src="../img/imgfisio4.jpg" alt="Imagen 1">
+                    <img src="../img/imgfisio4.jpg" alt="Imagen 1">
                     <a href="#" class="card_link">
                         <div class="card__img--hover"></div>
                     </a>
@@ -117,7 +180,7 @@
                     </div>
                 </article>
                 <article class="card card--1">
-                <img src="../img/imgfisio4.jpg" alt="Imagen 1">
+                    <img src="../img/imgfisio4.jpg" alt="Imagen 1">
                     <a href="#" class="card_link">
                         <div class="card__img--hover"></div>
                     </a>
@@ -130,7 +193,59 @@
             </section>
         </div>
     </div>
+    <?php include("../contacto/chatbot.php"); ?>
     <?php include("../inicio/footer.php"); ?>
+
+    <script>
+        function toggleChatbot() {
+            const chatbotWindow = document.getElementById('chatbotWindow');
+            if (chatbotWindow.style.display === 'none' || chatbotWindow.style.display === '') {
+                chatbotWindow.style.display = 'block';
+            } else {
+                chatbotWindow.style.display = 'none';
+            }
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatbotInput');
+            const message = input.value.trim();
+            if (message) {
+                // Mostrar el mensaje del usuario
+                const messages = document.getElementById('chatbotMessages');
+                const userMessage = document.createElement('div');
+                userMessage.className = 'user-message';
+                userMessage.textContent = 'Tú: ' + message;
+                messages.appendChild(userMessage);
+
+                // Limpiar el input
+                input.value = '';
+
+                // Enviar el mensaje al backend
+                fetch('../contacto/chatbot.php', { // Ajusta esta URL a la nueva ubicación
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: 'message=' + encodeURIComponent(message),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log("Respuesta del backend: ", data); // Añadir depuración
+                        // Mostrar la respuesta del chatbot
+                        const botMessage = document.createElement('div');
+                        botMessage.className = 'bot-message';
+                        botMessage.textContent = 'Bot: ' + data.response;
+                        messages.appendChild(botMessage);
+
+                        // Desplazar hacia abajo
+                        messages.scrollTop = messages.scrollHeight;
+                    })
+                    .catch(error => {
+                        console.error("Error en la petición fetch: ", error); // Añadir depuración
+                    });
+            }
+        }
+    </script>
 </body>
 
 </html>

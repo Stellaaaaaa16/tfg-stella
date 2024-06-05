@@ -51,6 +51,8 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="estilo.css">
     <title>Vital Yaiza</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+   
 </head>
 
 <body>
@@ -110,9 +112,60 @@ $conn->close();
         let servicios = <?php echo json_encode($servicios); ?>;
     </script>
     <script src="apj.js"></script>
-    <?php
-    include("../inicio/footer.php");
-    ?>
+
+    <?php include("../Contacto/chatbot.php"); ?>
+    <script>
+        function toggleChatbot() {
+            const chatbotWindow = document.getElementById('chatbotWindow');
+            if (chatbotWindow.style.display === 'none' || chatbotWindow.style.display === '') {
+                chatbotWindow.style.display = 'block';
+            } else {
+                chatbotWindow.style.display = 'none';
+            }
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatbotInput');
+            const message = input.value.trim();
+            if (message) {
+                // Mostrar el mensaje del usuario
+                const messages = document.getElementById('chatbotMessages');
+                const userMessage = document.createElement('div');
+                userMessage.className = 'user-message';
+                userMessage.textContent = 'Tú: ' + message;
+                messages.appendChild(userMessage);
+
+                // Limpiar el input
+                input.value = '';
+
+                // Enviar el mensaje al backend
+                fetch('../contacto/chatbot.php', { // Ajusta esta URL a la nueva ubicación
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: 'message=' + encodeURIComponent(message),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log("Respuesta del backend: ", data); // Añadir depuración
+                        // Mostrar la respuesta del chatbot
+                        const botMessage = document.createElement('div');
+                        botMessage.className = 'bot-message';
+                        botMessage.textContent = 'Bot: ' + data.response;
+                        messages.appendChild(botMessage);
+
+                        // Desplazar hacia abajo
+                        messages.scrollTop = messages.scrollHeight;
+                    })
+                    .catch(error => {
+                        console.error("Error en la petición fetch: ", error); // Añadir depuración
+                    });
+            }
+        }
+    </script>
+   
+    <?php include("../inicio/footer.php"); ?>
 </body>
 
 </html>

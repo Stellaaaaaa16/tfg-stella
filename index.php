@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -9,22 +9,33 @@
         body {
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(45deg, #FF6B6B, #FFB74D);
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #FF6B6B, #FFB74D);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             overflow: hidden;
+            color: #fff;
         }
 
         .container {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
             text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.5s, box-shadow 0.5s;
+        }
+
+        .container:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
         }
 
         h1 {
             font-size: 3em;
-            color: #fff;
+            margin-bottom: 20px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
             animation: fadeInDown 1s ease-out;
         }
@@ -41,20 +52,10 @@
             }
         }
 
-        button {
-            padding: 10px 20px;
+        p {
             font-size: 1.2em;
-            background-color: #fff;
-            border: none;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: background-color 0.3s;
+            margin-bottom: 40px;
             animation: fadeInUp 1s ease-out;
-        }
-
-        button:hover {
-            background-color: #FF6B6B;
-            color: #fff;
         }
 
         @keyframes fadeInUp {
@@ -68,12 +69,45 @@
                 transform: translateY(0);
             }
         }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            background-color: #fff;
+            color: #FF6B6B;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        button:hover {
+            background-color: #FF6B6B;
+            color: #fff;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            p {
+                font-size: 1em;
+            }
+
+            button {
+                font-size: 1em;
+                padding: 10px 20px;
+            }
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
         <h1>Bienvenido a Vital Yaiza</h1>
+        <p>Tu salud y bienestar son nuestra prioridad. Comienza tu viaje hacia una vida más saludable con nosotros.</p>
         <a href="inicio/inicio.php"><button>Inicio</button></a>
     </div>
 </body>

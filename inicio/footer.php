@@ -16,10 +16,9 @@
             <div class="col-md-3">
                 <h5>Políticas</h5>
                 <ul class="list-unstyled">
-                    <li><a href="#">Privacidad</a></li>
-                    <li><a href="#">Términos de Uso</a></li>
-                    <li><a href="#">Política de Cookies</a></li>
-                    <li><a href="#">Ayuda y Soporte</a></li>
+                    <li><a href="../inicio/privacidad.php">Privacidad</a></li>
+                    <li><a href="../inicio/terminos.php">Términos de Uso</a></li>
+                    <li><a href="../inicio/ayuda.php">Ayuda y Soporte</a></li>
                 </ul>
             </div>
             <div class="col-md-3">
@@ -41,12 +40,6 @@
             </div>
         </div>
         <hr>
-        <div class="row justify-content-end">
-            <div class="col-md-3 text-right">
-                <button id="btnScrollToTop" class="btn1 btn1-primary" onclick="scrollToTop()">Traducir al
-                    inglés</button>
-            </div>
-        </div>
         <div class="container1-fluid">
             <div class="row">
                 <div class="col-md-12 text-center">

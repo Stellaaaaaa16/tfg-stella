@@ -1,20 +1,7 @@
 <?php
-// Incluir el encabezado (header)
 include("../inicio/header.php");
 
-// Detalles de conexión a la base de datos
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "vital";
-
-// Crear conexión
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Verificar conexión
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include '../admin/config.php';
 
 $sql = "SELECT Nombre, Descripcion, Precio, Foto FROM servicio WHERE ID = 1";
 $result = $conn->query($sql);
@@ -110,15 +97,58 @@ $conn->close();
         }
 
         function pedirCita() {
-            // Aquí puedes agregar el código para redirigir a la página de solicitud de cita
             window.location.href = "../PedirCita/pedir.php";
         }
     </script>
-</body>
+</body><?php include("../Contacto/chatbot.php"); ?>
+    <script>
+        function toggleChatbot() {
+            const chatbotWindow = document.getElementById('chatbotWindow');
+            if (chatbotWindow.style.display === 'none' || chatbotWindow.style.display === '') {
+                chatbotWindow.style.display = 'block';
+            } else {
+                chatbotWindow.style.display = 'none';
+            }
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatbotInput');
+            const message = input.value.trim();
+            if (message) {
+                const messages = document.getElementById('chatbotMessages');
+                const userMessage = document.createElement('div');
+                userMessage.className = 'user-message';
+                userMessage.textContent = 'Tú: ' + message;
+                messages.appendChild(userMessage);
+
+                input.value = '';
+
+                fetch('../contacto/chatbot.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: 'message=' + encodeURIComponent(message),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log("Respuesta del backend: ", data); 
+                        const botMessage = document.createElement('div');
+                        botMessage.className = 'bot-message';
+                        botMessage.textContent = 'Bot: ' + data.response;
+                        messages.appendChild(botMessage);
+
+                        messages.scrollTop = messages.scrollHeight;
+                    })
+                    .catch(error => {
+                        console.error("Error en la petición fetch: ", error); 
+                    });
+            }
+        }
+    </script>
 
 </html>
 
 <?php
-// Incluir el pie de página (footer)
 include("../inicio/footer.php");
 ?>

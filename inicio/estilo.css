@@ -10,7 +10,7 @@ body::before {
     background-color: rgba(0, 0, 0, 0.5);
     z-index: -1;
 }body {
-    height: 100vh; /* Establecer la altura del body en 100% del viewport height */
+    height: 100vh; 
 }
 
 
@@ -237,7 +237,6 @@ body::before {
     margin-bottom: 2em;
 }
 
-/*boton de pedir cita*/
 a.gradient-btn {
     position: absolute;
     transform: translate(-50%, -50%);
@@ -364,14 +363,10 @@ a.gradient-btn:active {
         margin-bottom: 5px;
     }
 
-    /* Dentro del bloque @media */
     .profile-img {
         width: 150px;
-        /* Establecer un ancho fijo */
         height: 150px;
-        /* Establecer una altura fija */
         object-fit: cover;
-        /* Ajustar la imagen para cubrir el contenedor */
         border-radius: 50%;
         overflow: hidden;
         filter: grayscale(0%);
@@ -388,4 +383,17 @@ a.gradient-btn:active {
     .profile p {
         margin: 10px;
     }
+} .cookie-consent {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #f1f1f1;
+    border-top: 1px solid #ccc;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
+
