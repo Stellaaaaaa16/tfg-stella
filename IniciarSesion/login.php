@@ -17,18 +17,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $correoElectronico = $_POST['correoElectronico'];
     $contrasena = $_POST['contrasena'];
 
-    $stmt = $conn->prepare("SELECT ID, Nombre, Contrasena FROM paciente WHERE CorreoElectronico = ?");
+    $stmt = $conn->prepare("SELECT ID, Nombre, Contrasena, is_admin FROM paciente WHERE CorreoElectronico = ?");
     $stmt->bind_param("s", $correoElectronico);
     $stmt->execute();
     $stmt->store_result();
 
     if ($stmt->num_rows > 0) {
-        $stmt->bind_result($id, $nombre, $hashed_password);
+        $stmt->bind_result($id, $nombre, $hashed_password, $admin);
         $stmt->fetch();
 
         if (password_verify($contrasena, $hashed_password)) {
             $_SESSION['user_id'] = $id;
             $_SESSION['user_name'] = $nombre;
+            $_SESSION['is_admin'] = $admin;
             $_SESSION['logged_in'] = true;
 
             echo "<script>
@@ -47,4 +48,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 $conn->close();
-?>
